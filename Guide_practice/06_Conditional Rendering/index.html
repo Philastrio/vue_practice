@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Practice</title>
+  </head>
+  <body>
+    <div id="test1">
+      <h1 v-if="awesome">Vue is awesome!</h1>
+      <h1 v-else>Oh no 😢</h1>
+    </div>
+
+    <div id="test2">
+      <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+    </div>
+
+    <div id="test3">
+      <div v-if="Math.random() > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
+      <h1>
+        {{dresult}}
+      </h1>
+      <h1>
+        {{result}}
+      </h1>
+    </div>
+
+    <div>
+      <div v-if="Math.random() > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

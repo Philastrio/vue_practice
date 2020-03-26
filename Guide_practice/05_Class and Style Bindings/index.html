@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Practice</title>
+  </head>
+  <body>
+    <div
+      id="test"
+      class="static"
+      v-bind:class="{active: isActive, 'text-danger': hasError}"
+    >
+      Hi
+    </div>
+    <hr />
+
+    <div id="test2" class="static" v-bind:class="classObject">
+      Hi
+    </div>
+    <hr />
+
+    <div id="test3" class="static" v-bind:class="classObject">
+      Hi
+    </div>
+    <hr />
+
+    <div id="test4" class="static" v-bind:class="[activeClass, errorClass]">
+      Hi
+    </div>
+    <hr />
+
+    <div
+      id="test5"
+      class="static"
+      v-bind:class="[isActive ? activeClass: '', errorClass]"
+    >
+      Hi
+    </div>
+
+    <div
+      id="test6"
+      class="static"
+      v-bind:class="[{active: isActive}, errorClass]"
+    >
+      Hi
+    </div>
+    <hr />
+
+    <div
+      id="test7"
+      v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}"
+    >
+      Hi
+    </div>
+    <hr />
+    <div id="test8" v-bind:style="styleObject">
+      Hi
+    </div>
+    <hr />
+
+    <script src="index.js"></script>
+  </body>
+</html>

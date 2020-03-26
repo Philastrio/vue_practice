@@ -1,0 +1,80 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue Practice</title>
+  </head>
+  <body>
+    <div id="example">
+      <p>Orignal message: "{{message}}"</p>
+      <p>Computed reversed message: "{{reverseMessage}}"</p>
+      <hr />
+    </div>
+
+    <div id="example2">
+      <p>Reversed Message: "{{ reverseMessage()}}"</p>
+    </div>
+
+    <div id="example3">
+      <p>Today: {{nowReturnValue}}</p>
+    </div>
+    <hr />
+    <div id="demo">{{fullName}}</div>
+    <hr />
+    <div id="example4">{{fullName}}</div>
+
+    <hr />
+
+    <div id="watch-example">
+      <p>
+        Ask a yes/no question:
+        <input v-model="question" />
+      </p>
+      <p>{{answer}}</p>
+    </div>
+
+    <hr />
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+      var watchExampleVM = new Vue({
+        el: "#watch-example",
+        data: {
+          question: "",
+          answer: "I cannot give you an answer until you asck a question!"
+        },
+        watch: {
+          question: function(newQuestion, oldQuestion) {
+            this.answer = "Waiting for you to stop typing...";
+            this.debouncedGetAnswer();
+          }
+        },
+        created: function() {
+          this.debouncedGetAnswer = _.debounce(this.getAnswer, 500);
+        },
+        methods: {
+          getAnswer: function() {
+            if (this.question.indexOf("?") === -1) {
+              this.answer = "Questions usually contain a question mark. ;-";
+              return;
+            }
+            this.answer = "Thinking...";
+            var vm = this;
+            axios
+              .get("https://yesno.wtf/api")
+              .then(function(response) {
+                vm.answer = _.capitalize(response.data.answer);
+              })
+              .catch(function(error) {
+                vm.answer = "Error! Could not reach the API" + error;
+              });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
